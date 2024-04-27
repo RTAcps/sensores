@@ -1,0 +1,13 @@
+<main (window:resize)="onResize(isMobileView)">
+  <nav>
+    <a href="/">
+      @if (!isMobileView) {
+      <img ngSrc="./assets/img/sensores_logo3.png" alt="Logo da página contendo o nome Sensores" width="300"
+        height="300" priority>
+      } @else {
+      <img ngSrc="./assets/img/sensores_icon3.png" alt="Logo da página contendo o nome Sensores" width="100"
+        height="100" priority>
+      }
+    </a>
+  </nav>
+</main>
