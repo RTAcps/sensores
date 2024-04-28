@@ -2,7 +2,7 @@
 
 PROVA PRÁTICA - Desenvolvedor Pleno: sensoriando a atual linha de produção para armazenar os dados das máquinas e estudar meios de melhorar a sua produção.
 
-Esta aplicação foi realizado o deploy e se encontra hospedado em [Sensores]().
+Esta aplicação foi realizado o deploy e se encontra hospedado em [Sensores](https://main--sensores-rtacps.netlify.app/).
 
 Esse projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 17.2.0.
 
