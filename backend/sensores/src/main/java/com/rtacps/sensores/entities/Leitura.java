@@ -1,5 +1,4 @@
 package com.rtacps.sensores.entities;
-import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,11 +17,11 @@ public class Leitura {
 	private Long id;
 	
 	private Float amount;
-	private Date dateTime;
-	private Date updateAt;
+	private Long dateTime;
+	private Long updateAt;
 	
 	@ManyToOne
-	@JoinColumn(name = "`sensor_id`")
+	@JoinColumn(name = "sensor_id")
 	private Sensor sensor;
 	
 	public Leitura() {		
@@ -44,19 +43,19 @@ public class Leitura {
 		this.amount = amount;
 	}
 
-	public Date getDateTime() {
+	public Long getDateTime() {
 		return dateTime;
 	}
 
-	public void setDateTime(Date dateTime) {
+	public void setDateTime(Long dateTime) {
 		this.dateTime = dateTime;
 	}
 
-	public Date getUpdateAt() {
+	public Long getUpdateAt() {
 		return updateAt;
 	}
 
-	public void setUpdateAt(Date updateAt) {
+	public void setUpdateAt(Long updateAt) {
 		this.updateAt = updateAt;
 	}
 

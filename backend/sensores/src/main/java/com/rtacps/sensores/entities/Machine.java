@@ -1,5 +1,4 @@
 package com.rtacps.sensores.entities;
-import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +16,7 @@ public class Machine {
 	
 	private String name;
 	private String description;
-	private Date createAt;
+	private Long createAt;
 	
 	public Machine () {	
 	}
@@ -46,11 +45,11 @@ public class Machine {
 		this.description = description;
 	}
 
-	public Date getCreateAt() {
+	public Long getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(Date createAt) {
+	public void setCreateAt(Long createAt) {
 		this.createAt = createAt;
 	}
 }

@@ -18,11 +18,12 @@ public class Sensor {
 	
 	private String name;
 	private Long timestamp;
-	private Float amount;
+	private Long data;
+	private Float getValue;
 	private Float setpoint;
 	
 	@ManyToOne
-	@JoinColumn(name = "`machine_id`")
+	@JoinColumn(name = "machine_id")
 	private Machine machine;
 
 	public Sensor() {
@@ -52,12 +53,20 @@ public class Sensor {
 		this.timestamp = timestamp;
 	}
 
-	public Float getAmount() {
-		return amount;
+	public Long getData() {
+		return data;
 	}
 
-	public void setAmount(Float amount) {
-		this.amount = amount;
+	public void setData(Long data) {
+		this.data = data;
+	}
+
+	public Float getGetValue() {
+		return getValue;
+	}
+
+	public void setGetValue(Float getValue) {
+		this.getValue = getValue;
 	}
 
 	public Float getSetpoint() {
