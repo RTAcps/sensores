@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.rtacps.sensores.dto.MachineDTO;
 import com.rtacps.sensores.entities.Machine;
 import com.rtacps.sensores.exceptions.BadRequestException;
 import com.rtacps.sensores.exceptions.InsertException;
@@ -23,54 +24,57 @@ public class MachineService {
 	@Autowired
 	private MachineRepository repository;
 
-	public Page<Machine> findMachine(Pageable pageable) {		
-		return repository.findAll(pageable);			
+	public Page<MachineDTO> findMachine(Pageable pageable) {
+		Page<Machine> machines = repository.findAll(pageable);
+
+		return machines.map(machine -> new MachineDTO(machine));
 	}
 
 	public Machine findById(@PathVariable Long id) {
-		return repository.findById(id).orElseThrow(() -> new NotFoundException("Máquina não encontrada com o ID: " + id));
+		return repository.findById(id)
+				.orElseThrow(() -> new NotFoundException("Máquina não encontrada com o ID: " + id));
 	}
-	
+
 	public Machine insert(@RequestBody Machine machine) {
-	    Machine result = repository.save(machine);
-	    try {
-		    if (result == null) {
-		        throw new InsertException("Erro ao inserir a máquina no banco de dados.");
-		    }
-		    return result;
-	    } catch(Exception ex) {
-	    	throw new BadRequestException("Dados inválidos na solicitação.");
-	    }
+		Machine result = repository.save(machine);
+		try {
+			if (result == null) {
+				throw new InsertException("Erro ao inserir a máquina no banco de dados.");
+			}
+			return result;
+		} catch (Exception ex) {
+			throw new BadRequestException("Dados inválidos na solicitação.");
+		}
 	}
-	
+
 	public Machine update(@RequestBody Machine machine) {
-	    Machine result = repository.save(machine);
-	    try {
-		    if (result == null) {
-		        throw new InsertException("Erro ao inserir a máquina no banco de dados.");
-		    }
-		    return result;
-	    } catch(Exception ex) {
-	    	throw new BadRequestException("Dados inválidos na solicitação.");
-	    }
+		Machine result = repository.save(machine);
+		try {
+			if (result == null) {
+				throw new InsertException("Erro ao inserir a máquina no banco de dados.");
+			}
+			return result;
+		} catch (Exception ex) {
+			throw new BadRequestException("Dados inválidos na solicitação.");
+		}
 	}
-	
+
 	@RestControllerAdvice
 	public class ExceptionHandlerController {
 		@ExceptionHandler(BadRequestException.class)
-	    public ResponseEntity<String> handleMachineBadRequestException(BadRequestException ex) {
-	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
-	    }
-		
-	    @ExceptionHandler(NotFoundException.class)
-	    public ResponseEntity<String> handleMachineNotFoundException(NotFoundException ex) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-	    }
-	
-	    @ExceptionHandler(InsertException.class)
-	    public ResponseEntity<String> handleMachineInsertException(InsertException ex) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
-	    }
+		public ResponseEntity<String> handleMachineBadRequestException(BadRequestException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+		}
+
+		@ExceptionHandler(NotFoundException.class)
+		public ResponseEntity<String> handleMachineNotFoundException(NotFoundException ex) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+		}
+
+		@ExceptionHandler(InsertException.class)
+		public ResponseEntity<String> handleMachineInsertException(InsertException ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+		}
 	}
-	
+
 }

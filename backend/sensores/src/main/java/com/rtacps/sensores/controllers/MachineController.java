@@ -3,9 +3,7 @@ package com.rtacps.sensores.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,12 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.rtacps.sensores.dto.MachineDTO;
 import com.rtacps.sensores.entities.Machine;
-import com.rtacps.sensores.exceptions.BadRequestException;
-import com.rtacps.sensores.exceptions.InsertException;
-import com.rtacps.sensores.exceptions.NotFoundException;
 import com.rtacps.sensores.services.MachineService;
 
 @RestController
@@ -33,9 +28,9 @@ public class MachineController {
     }
 	
 	@GetMapping
-	public Page<Machine> findMachine(Pageable pageable) {
-		Page<Machine> result = service.findMachine(pageable);;
-		return result;
+	public ResponseEntity<Page<MachineDTO>> findMachine(Pageable pageable) {
+	  Page<MachineDTO> result = service.findMachine(pageable);
+	  return ResponseEntity.ok(result);
 	}
 	
 	@GetMapping(value = "/{id}")

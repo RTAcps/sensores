@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.rtacps.sensores.dto.LeituraDTO;
 import com.rtacps.sensores.entities.Leitura;
 import com.rtacps.sensores.exceptions.BadRequestException;
 import com.rtacps.sensores.exceptions.InsertException;
@@ -23,8 +24,10 @@ public class LeitorService {
 	@Autowired
 	private LeitorRepository repository;
 		
-	public Page<Leitura> findLeitura(Pageable pageable) {		
-		return repository.findAll(pageable);			
+	public Page<LeituraDTO> findLeitura(Pageable pageable) {		
+		Page<Leitura> leituras = repository.findAll(pageable);
+
+		return leituras.map(leitura -> new LeituraDTO(leitura));			
 	}
 		
 	public Leitura findById(@PathVariable Long id) {

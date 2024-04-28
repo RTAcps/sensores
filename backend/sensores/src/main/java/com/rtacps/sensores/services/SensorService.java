@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.rtacps.sensores.dto.SensorDTO;
 import com.rtacps.sensores.entities.Sensor;
 import com.rtacps.sensores.exceptions.BadRequestException;
 import com.rtacps.sensores.exceptions.InsertException;
@@ -22,8 +23,10 @@ public class SensorService {
 	@Autowired
 	private SensorRepository repository;
 
-	public Page<Sensor> findSensor(Pageable pageable) {		
-		return repository.findAll(pageable);			
+	public Page<SensorDTO> findSensor(Pageable pageable) {		
+		Page<Sensor> sensors = repository.findAll(pageable);
+
+		return sensors.map(sensor -> new SensorDTO(sensor));			
 	}
 
 	public Sensor findById(@PathVariable Long id) {
