@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "spring.scheduling.task.scheduling-strategy",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.scheduling.task.scheduling-strategy'"
+  },
+  {
+    "name": "spring.scheduling.task.fixed-rate",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.scheduling.task.fixed-rate'"
+  },
+  {
+    "name": "spring.scheduling.task.initial-delay",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.scheduling.task.initial-delay'"
+  },
+  {
+    "name": "spring.scheduling.task.async",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.scheduling.task.async'"
+  }
+]}
