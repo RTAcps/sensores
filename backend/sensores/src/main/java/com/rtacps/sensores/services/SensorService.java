@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import com.rtacps.sensores.entities.Sensor;
 import com.rtacps.sensores.exceptions.BadRequestException;
 import com.rtacps.sensores.exceptions.InsertException;
 import com.rtacps.sensores.exceptions.NotFoundException;
+import com.rtacps.sensores.repositories.MachineRepository;
 import com.rtacps.sensores.repositories.SensorRepository;
 
 @Service
@@ -22,10 +24,14 @@ public class SensorService {
 
 	@Autowired
 	private SensorRepository repository;
+	
+	@Autowired
+	private MachineRepository machineRepository;
 
-	public Page<SensorDTO> findSensor(Pageable pageable) {		
+	@Transactional(readOnly = true)
+	public Page<SensorDTO> findSensor(Pageable pageable) {	
+		machineRepository.findAll();
 		Page<Sensor> sensors = repository.findAll(pageable);
-
 		return sensors.map(sensor -> new SensorDTO(sensor));			
 	}
 

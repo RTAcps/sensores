@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,7 @@ public class MachineService {
 		return machines.map(machine -> new MachineDTO(machine));
 	}
 
+	@Transactional(readOnly = true)
 	public Machine findById(@PathVariable Long id) {
 		return repository.findById(id)
 				.orElseThrow(() -> new NotFoundException("Máquina não encontrada com o ID: " + id));

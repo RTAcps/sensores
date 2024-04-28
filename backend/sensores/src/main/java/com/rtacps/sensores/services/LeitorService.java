@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,16 +18,21 @@ import com.rtacps.sensores.exceptions.BadRequestException;
 import com.rtacps.sensores.exceptions.InsertException;
 import com.rtacps.sensores.exceptions.NotFoundException;
 import com.rtacps.sensores.repositories.LeitorRepository;
+import com.rtacps.sensores.repositories.SensorRepository;
 
 @Service
 public class LeitorService {
 
 	@Autowired
 	private LeitorRepository repository;
+	
+	@Autowired
+	private SensorRepository sensorRepository;
 		
-	public Page<LeituraDTO> findLeitura(Pageable pageable) {		
+	@Transactional(readOnly = true)
+	public Page<LeituraDTO> findLeitura(Pageable pageable) {	
+		sensorRepository.findAll();
 		Page<Leitura> leituras = repository.findAll(pageable);
-
 		return leituras.map(leitura -> new LeituraDTO(leitura));			
 	}
 		
