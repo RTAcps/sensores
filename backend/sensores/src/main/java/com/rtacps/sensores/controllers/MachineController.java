@@ -17,7 +17,7 @@ import com.rtacps.sensores.entities.Machine;
 import com.rtacps.sensores.services.MachineService;
 
 @RestController
-@RequestMapping(value = "/maquinas")
+@RequestMapping(value = "/api/v1/machines")
 public class MachineController {
 	
 	@Autowired

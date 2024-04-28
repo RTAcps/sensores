@@ -17,7 +17,7 @@ import com.rtacps.sensores.entities.Leitura;
 import com.rtacps.sensores.services.LeitorService;
 
 @RestController
-@RequestMapping(value = "/leitura")
+@RequestMapping(value = "/api/v1/leitura")
 public class LeitorController {
 
 	@Autowired

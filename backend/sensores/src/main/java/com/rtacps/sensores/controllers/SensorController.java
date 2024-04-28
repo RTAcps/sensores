@@ -17,7 +17,7 @@ import com.rtacps.sensores.entities.Sensor;
 import com.rtacps.sensores.services.SensorService;
 
 @RestController
-@RequestMapping(value = "/sensores")
+@RequestMapping(value = "/api/v1/sensors")
 public class SensorController {
 
 	@Autowired
