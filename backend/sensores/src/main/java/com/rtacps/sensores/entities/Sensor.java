@@ -1,5 +1,7 @@
 package com.rtacps.sensores.entities;
 
+import java.time.Instant;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,6 +29,7 @@ public class Sensor {
 	private Machine machine;
 
 	public Sensor() {
+		this.timestamp = Instant.now().toEpochMilli();
 	}
 
 	public Long getId() {
