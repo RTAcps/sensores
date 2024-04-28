@@ -11,16 +11,18 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_sensor")
 public class Sensor {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
-	private Number timestamp;
-	private Double value;
-	private Double setpoint;
+	private Long timestamp;
+	private Float amount;
+	private Float setpoint;
 	
 	@ManyToOne
-	@JoinColumn(name = "machine_id")
+	@JoinColumn(name = "`machine_id`")
 	private Machine machine;
 
 	public Sensor() {
@@ -42,29 +44,29 @@ public class Sensor {
 		this.name = name;
 	}
 
-	public Number getTimestamp() {
+	public Long getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(Number timestamp) {
+	public void setTimestamp(Long timestamp) {
 		this.timestamp = timestamp;
 	}
 
-	public Double getValue() {
-		return value;
+	public Float getAmount() {
+		return amount;
 	}
 
-	public void setValue(Double value) {
-		this.value = value;
+	public void setAmount(Float amount) {
+		this.amount = amount;
 	}
 
-	public Double getSetpoint() {
+	public Float getSetpoint() {
 		return setpoint;
 	}
 
-	public void setSetpoint(Double setpoint) {
+	public void setSetpoint(Float setpoint) {
 		this.setpoint = setpoint;
-	}		
+	}
 
 	public Machine getMachine() {
 		return machine;
@@ -73,4 +75,5 @@ public class Sensor {
 	public void setMachine(Machine machine) {
 		this.machine = machine;
 	}
+	
 }

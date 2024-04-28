@@ -12,15 +12,17 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_leitura")
 public class Leitura {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Double value;
+	
+	private Float amount;
 	private Date dateTime;
 	private Date updateAt;
 	
 	@ManyToOne
-	@JoinColumn(name = "sensor_id")
+	@JoinColumn(name = "`sensor_id`")
 	private Sensor sensor;
 	
 	public Leitura() {		
@@ -34,12 +36,12 @@ public class Leitura {
 		this.id = id;
 	}
 
-	public Double getValue() {
-		return value;
+	public Float getAmount() {
+		return amount;
 	}
 
-	public void setValue(Double value) {
-		this.value = value;
+	public void setAmount(Float amount) {
+		this.amount = amount;
 	}
 
 	public Date getDateTime() {
@@ -64,5 +66,6 @@ public class Leitura {
 
 	public void setSensor(Sensor sensor) {
 		this.sensor = sensor;
-	}	
+	}
+	
 }

@@ -10,9 +10,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_machine")
 public class Machine {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
 	private String description;
 	private Date createAt;
