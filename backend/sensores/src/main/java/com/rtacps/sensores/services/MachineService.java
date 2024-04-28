@@ -1,5 +1,7 @@
 package com.rtacps.sensores.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -59,6 +61,10 @@ public class MachineService {
 		} catch (Exception ex) {
 			throw new BadRequestException("Dados inválidos na solicitação.");
 		}
+	}
+
+	public List<Machine> fetchAllMachine() {
+		return repository.findAll();
 	}
 
 	@RestControllerAdvice

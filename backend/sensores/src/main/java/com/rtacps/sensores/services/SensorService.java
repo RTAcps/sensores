@@ -1,5 +1,7 @@
 package com.rtacps.sensores.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,44 +26,48 @@ public class SensorService {
 
 	@Autowired
 	private SensorRepository repository;
-	
+
 	@Autowired
 	private MachineRepository machineRepository;
 
 	@Transactional(readOnly = true)
-	public Page<SensorDTO> findSensor(Pageable pageable) {	
+	public Page<SensorDTO> findSensor(Pageable pageable) {
 		machineRepository.findAll();
 		Page<Sensor> sensors = repository.findAll(pageable);
-		return sensors.map(sensor -> new SensorDTO(sensor));			
+		return sensors.map(sensor -> new SensorDTO(sensor));
 	}
 
 	public Sensor findById(@PathVariable Long id) {
 		return repository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Sensor não encontrada com o ID: " + id));		
+				.orElseThrow(() -> new NotFoundException("Sensor não encontrada com o ID: " + id));
 	}
-	
+
 	public Sensor insert(@RequestBody Sensor sensor) {
-	    Sensor result = repository.save(sensor);
-	    try {
-		    if (result == null) {
-		        throw new InsertException("Erro ao inserir o sensor no banco de dados.");
-		    }
-		    return result;
-	    } catch(Exception ex) {
-	    	throw new BadRequestException("Dados inválidos na solicitação.");
-	    }
+		Sensor result = repository.save(sensor);
+		try {
+			if (result == null) {
+				throw new InsertException("Erro ao inserir o sensor no banco de dados.");
+			}
+			return result;
+		} catch (Exception ex) {
+			throw new BadRequestException("Dados inválidos na solicitação.");
+		}
+	}
+
+	public Sensor update(@RequestBody Sensor sensor) {
+		Sensor result = repository.save(sensor);
+		try {
+			if (result == null) {
+				throw new InsertException("Erro ao inserir a sensor no banco de dados.");
+			}
+			return result;
+		} catch (Exception ex) {
+			throw new BadRequestException("Dados inválidos na solicitação.");
+		}
 	}
 	
-	public Sensor update(@RequestBody Sensor sensor) {
-	    Sensor result = repository.save(sensor);
-	    try {
-		    if (result == null) {
-		        throw new InsertException("Erro ao inserir a sensor no banco de dados.");
-		    }
-		    return result;
-	    } catch(Exception ex) {
-	    	throw new BadRequestException("Dados inválidos na solicitação.");
-	    }
+	public List<Sensor> fetchAllSensors() {
+		return repository.findAll();
 	}
 
 	public class ExceptionHandlerController {

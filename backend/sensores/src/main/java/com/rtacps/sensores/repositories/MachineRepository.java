@@ -5,5 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.rtacps.sensores.entities.Machine;
 
 public interface MachineRepository extends JpaRepository<Machine, Long> {
+	
+	Machine findByName(String name);
 
 }

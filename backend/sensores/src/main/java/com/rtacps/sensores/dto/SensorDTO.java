@@ -1,8 +1,11 @@
 package com.rtacps.sensores.dto;
 
+import java.io.Serializable;
+
 import com.rtacps.sensores.entities.Sensor;
 
-public class SensorDTO {
+public class SensorDTO implements Serializable{	
+	private static final long serialVersionUID = 1L;
 	
 	private Long id;	
 	private String name;

@@ -1,6 +1,7 @@
 package com.rtacps.sensores.entities;
 
 import java.time.Instant;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +25,9 @@ public class Sensor {
 	private Long data;
 	private Float getValue;
 	private Float setpoint;
+	
+	@OneToMany(mappedBy = "sensor")
+	private List<Leitura> leituras;
 	
 	@ManyToOne
 	@JoinColumn(name = "machine_id")
@@ -86,6 +91,15 @@ public class Sensor {
 
 	public void setMachine(Machine machine) {
 		this.machine = machine;
+	}
+	
+
+	public List<Leitura> getLeituras() {
+		return leituras;
+	}
+
+	public void setLeituras(List<Leitura> leituras) {
+		this.leituras = leituras;
 	}
 	
 }

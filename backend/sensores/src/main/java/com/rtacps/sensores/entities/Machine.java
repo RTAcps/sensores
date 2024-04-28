@@ -1,26 +1,31 @@
 package com.rtacps.sensores.entities;
 
 import java.time.Instant;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_machine")
 public class Machine {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String name;
 	private String description;
 	private Long createAt;
-	
-	public Machine () {	
+
+	@OneToMany(mappedBy = "machine")
+	private List<Sensor> sensors;
+
+	public Machine() {
 		this.createAt = Instant.now().toEpochMilli();
 	}
 
@@ -55,4 +60,13 @@ public class Machine {
 	public void setCreateAt(Long createAt) {
 		this.createAt = createAt;
 	}
+
+	public List<Sensor> getSensors() {
+		return sensors;
+	}
+
+	public void setSensors(List<Sensor> sensors) {
+		this.sensors = sensors;
+	}
+
 }
