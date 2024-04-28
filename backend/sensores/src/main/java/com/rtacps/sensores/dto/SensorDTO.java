@@ -11,16 +11,19 @@ public class SensorDTO {
 	private Float getValue;
 	private Float setpoint;
 	
+	private MachineDTO machine;
+	
 	public SensorDTO() {		
 	}
 
-	public SensorDTO(Long id, String name, Long timestamp, Long data, Float getValue, Float setpoint) {
+	public SensorDTO(Long id, String name, Long timestamp, Long data, Float getValue, Float setpoint, MachineDTO machine) {
 		this.id = id;
 		this.name = name;
 		this.timestamp = timestamp;
 		this.data = data;
 		this.getValue = getValue;
 		this.setpoint = setpoint;
+		this.machine = machine;
 	}
 	
 	public SensorDTO(Sensor entity) {
@@ -30,6 +33,7 @@ public class SensorDTO {
 		data = entity.getData();
 		getValue = entity.getGetValue();
 		setpoint = entity.getSetpoint();
+		machine = new MachineDTO(entity.getMachine());
 	}
 
 	public Long getId() {
@@ -78,6 +82,14 @@ public class SensorDTO {
 
 	public void setSetpoint(Float setpoint) {
 		this.setpoint = setpoint;
+	}
+
+	public MachineDTO getMachine() {
+		return machine;
+	}
+
+	public void setMachine(MachineDTO machine) {
+		this.machine = machine;
 	}	
 
 }

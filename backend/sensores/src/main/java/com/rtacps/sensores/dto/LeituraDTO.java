@@ -8,15 +8,19 @@ public class LeituraDTO {
 	private Float amount;
 	private Long dateTime;
 	private Long updateAt;
+	
+	private SensorDTO sensor;
 
 	public LeituraDTO() {		
 	}
 
-	public LeituraDTO(Long id, Float amount, Long dateTime, Long updateAt) {
+	public LeituraDTO(Long id, Float amount, Long dateTime, Long updateAt, SensorDTO sensor) {
 		this.id = id;
 		this.amount = amount;
 		this.dateTime = dateTime;
 		this.updateAt = updateAt;
+		this.sensor = sensor;
+		
 	}
 
 	public LeituraDTO(Leitura entity) {
@@ -24,6 +28,7 @@ public class LeituraDTO {
 		amount = entity.getAmount();
 		dateTime = entity.getDateTime();
 		updateAt = entity.getUpdateAt();
+		sensor = new SensorDTO(entity.getSensor());
 	}
 	
 	public Long getId() {
@@ -56,6 +61,14 @@ public class LeituraDTO {
 
 	public void setUpdateAt(Long updateAt) {
 		this.updateAt = updateAt;
+	}
+
+	public SensorDTO getSensor() {
+		return sensor;
+	}
+
+	public void setSensor(SensorDTO sensor) {
+		this.sensor = sensor;
 	}	
-	
+		
 }
