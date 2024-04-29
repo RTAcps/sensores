@@ -1,1 +1,46 @@
-<p>card-sensor works!</p>
+<br>
+<h2>Máquinas: </h2>
+<mat-card class="example-card">
+  @for (machine of machineData; track machine.name) {
+  <mat-card-header>
+    <mat-card-title>{{machine.name}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{machine.description}}</p>
+    <p>Data de criação da máquina: {{dataFormat(machine.createAt)}}</p>
+  </mat-card-content>
+  }
+</mat-card>
+
+<hr>
+<br>
+
+<h2>Sensores: </h2>
+<mat-card class="example-card">
+  @for (sensor of sensorData; track sensor.name) {
+  <mat-card-header>
+    <mat-card-title>{{sensor.name}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>O valor do sensor: {{sensor.data}}</p>
+    <p>O valor acitável do sensor: {{sensor.setpoint}}</p>
+    <p>Data do resistro do sensor: {{dataFormat(sensor.timestamp)}}</p>
+  </mat-card-content>
+  }
+</mat-card>
+
+<hr>
+<br>
+
+<h2>Leituras: </h2>
+<mat-card class="example-card">
+  @for (leitor of leitorData; track leitor.name) {
+  <mat-card-header>
+    <mat-card-title>O valor lido foi de {{leitor.amount}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Data do resistro do leitor: {{dataFormat(leitor.dateTime)}}</p>
+    <p>Data da atualização do leitor: {{dataFormat(leitor.updateAt)}}</p>
+  </mat-card-content>
+  }
+</mat-card>

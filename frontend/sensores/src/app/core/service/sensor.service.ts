@@ -62,7 +62,7 @@ export class SensorService {
     return this.http.put(url, data, { headers });
   }
 
-  public getleituras(): Observable<any> {
+  public getLeituras(): Observable<any> {
     const url = `${this.apiUrl}/leitura`;
 
     return this.http.get(url);
